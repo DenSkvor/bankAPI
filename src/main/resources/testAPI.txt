@@ -1,0 +1,136 @@
+#Основное задание
+#Просмотр карт счета с id 3
+GET http://localhost:8000/api/v1/client/card/3
+Accept: application/json
+###
+
+#Выпуск карты по счету с id 3
+POST http://localhost:8000/api/v1/client/card
+Content-Type: application/json
+
+{
+  "number" : "00000000",
+  "userId" : 3
+}
+###
+
+#Просмотр карт счета с id 3
+GET http://localhost:8000/api/v1/client/card/3
+Accept: application/json
+###
+
+#Просмотр баланса по счету с id 3
+GET http://localhost:8000/api/v1/client/account/3
+Accept: application/json
+###
+
+#Пополнение баланса по счету с id 3
+PUT http://localhost:8000/api/v1/client/account
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "money" : 1000
+}
+###
+
+#Просмотр баланса по счету с id 3
+GET http://localhost:8000/api/v1/client/account/3
+Accept: application/json
+###
+
+
+#Бонус 1
+#Просмотр контрагентов по счету с id 1
+GET http://localhost:8000/api/v1/client/counterparty/1
+Accept: application/json
+###
+
+#Создание контрагента по id счетов 1 и 4
+POST http://localhost:8000/api/v1/client/counterparty
+Content-Type: application/json
+
+{
+  "accountFromId" : 1,
+  "accountToId" : 4
+}
+###
+
+#Просмотр контрагентов по счету с id 1
+GET http://localhost:8000/api/v1/client/counterparty/1
+Accept: application/json
+###
+
+#Перевод средств со счета с id 1 контрагенту с id счета 2 (ожидает подтверждения)
+POST http://localhost:8000/api/v1/client/payment
+Content-Type: application/json
+
+{
+  "counterpartyId" : 1,
+  "money" : 500
+}
+###
+
+#Бонус 2
+#Добавление нового физ-лица
+POST http://localhost:8000/api/v1/employee/user
+Content-Type: application/json
+
+{
+  "firstname" : "Ivan",
+  "lastname" : "Petrov"
+}
+###
+
+#Открытие нового счета
+POST http://localhost:8000/api/v1/employee/account
+Content-Type: application/json
+
+{
+  "number" : "010101010",
+  "money" : 1000,
+  "userId" : 1
+}
+###
+
+#Подтверждение выпуска карты
+PUT http://localhost:8000/api/v1/employee/card
+Content-Type: application/json
+
+{
+  "id" : 8,
+  "accountId" : 3,
+  "isActive" : true
+}
+###
+
+#Просмотр баланса по счету с id 1
+GET http://localhost:8000/api/v1/client/account/1
+Accept: application/json
+###
+
+#Просмотр баланса по счету с id 2
+GET http://localhost:8000/api/v1/client/account/1
+Accept: application/json
+###
+
+#Подтверждение операции
+PUT http://localhost:8000/api/v1/employee/payment
+Content-Type: application/json
+
+{
+  "id" : 4,
+  "counterpartyId" : 4,
+  "money" : 500
+}
+###
+
+#Просмотр баланса по счету с id 1
+GET http://localhost:8000/api/v1/client/account/1
+Accept: application/json
+###
+
+#Просмотр баланса по счету с id 2
+GET http://localhost:8000/api/v1/client/account/1
+Accept: application/json
+###
